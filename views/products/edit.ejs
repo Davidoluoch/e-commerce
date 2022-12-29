@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="/style.css"> -->
+    <title>Edit Product</title>
+</head>
+<body>
+    <%- include("../partials/navbar") %>   
+    <div class="container mt-5">
+        <div class="row">
+            <div class=" center col-md-6 col-sm-12">
+            <form action="/products/<%= product.id %>?_method=PATCH" method="post" enctype="multipart/form-data">
+                <h2>Edit Product</h2>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input id="name" name="name" value="<%= product.name %>" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input id="price" value="<%= product.price %>"  name="price" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" cols="30" rows="10" class="form-control"><%= product.description %> </textarea>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="text" value="<%= product.quantity %>"  name="quantity" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" name="image" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select name="category" id="category" class="form-select">
+                        <% for(category of categories){ %> 
+                        <option <%= category.id === product.categoryId ? "selected" : "" %>  value="<%= category.id  %> "><%= category.name %> </option>
+                        <% } %> 
+                    </select>
+                </div>
+                <div class="mt-2 p-2">
+                    <button type="submit" class="btn btn-outline-success">Edit Product</button>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+    <style>
+        .center{
+
+            margin: auto;
+        }
+        .navbar{
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+}
+nav{
+    flex: 1;
+    text-align: right;
+}
+nav ul{
+    display: inline-block;
+    list-style-type: none;
+
+}
+nav ul li{
+    display: inline-block;
+    margin-right: 20px;
+}
+a{
+    text-decoration: none;
+    color: #555;
+
+}
+p{
+    color: #555;
+}
+@media only screen and (max-width:800px){
+    nav ul{
+        position: absolute;
+        top: 70px;
+        left: 0;
+        background: #333;
+        width: 100%;
+    
+    }
+    nav ul li{
+        display: block;
+        margin-right: 50px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    nav ul li a{
+        color: #fff;
+    }
+    .menu-icon{
+        display: block;
+        cursor: pointer;
+    }
+    .menu-icon{
+    width: 28px;
+    margin-left: 20px;
+    display: none;
+
+}
+.app-logo{
+    margin-top: 20px;
+}
+.app-logo img{
+    width: 140px;
+}
+
+}
+.logo{
+
+    height: 8rem;
+}
+    </style>
+</body>
+</html>

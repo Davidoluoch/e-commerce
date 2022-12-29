@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>products</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,600;0,700;1,200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+</head>
+<body>
+    
+    <%- include("../partials/navbar") %>  
+            <!------single product details-------->
+            <div class="small-container single-product">
+                <div class="row">
+                    <div class="col-2">
+                        <img src="<%= product.image_src.split("public").splice(1 , 1) %>" width="100%">
+                        <!-- <div class="small-img-row">
+                            <div class="small-img-col">
+                                <img src="/images/bird2.jpg" width="100%" >
+
+                            </div>
+                            <div class="small-img-col">
+                                <img src="/images/bird3.jpg" width="100%" >
+                                
+                            </div>
+                            <div class="small-img-col">
+                                <img src="/images/bird4.jpg" width="100%" >
+                                
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="col-2">
+                        <p>Home/ <%= product.name  %> </p>
+                        <h1 id="prodname"><%= product.name %> </h1>
+                        <p style="display: none;" id="prodid"><%= product.id %></p>
+                        <h4>$<%= product.price %></h4>
+                        <select >
+                            <option>select flavor</option>
+                            <option>sweet red</option>
+                            <option>sweet white</option>
+                            <option>rose</option>
+                        </select>
+                        <form action="/cart/new" method="post">
+                        <input type="number" name="quantity" value="1" id="quantity">
+                        <input type="text" name="productId" value="<%= product.id %>" hidden >
+                        <button class="btn" style="width: 15rem;" type="submit">Add to Cart</button>
+                        </form>
+                        
+                        <p style="margin-bottom: 5px;">Category: <%= product.category.name %></p>
+                        <h3>Product Details <i class="fa fa-indent"></i></h3>
+                        <br>
+                        <p><%= product.description %> </p>
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+</div>
+ 
+     
+ </div>  
+ <!------title-------->
+ <div class="small-container">
+     <div class="row row-2">
+         <h2>Related Products</h2>
+         <p>View More</p>
+     </div>
+ </div>
+ <!------ products -------->
+<div class="small-container">
+    <div class="row">
+        <% for( product of relatedProducts){ %> 
+        <div class="col-4">
+            <img src="<%= product.image_src.split("public").splice(1 , 1)  %> " >
+            <h4><%= product.name %> </h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <p>$<%= product.price %> </p>
+            <a class="btn" href="/products/<%= product.id  %> ">Check Product</a>
+        </div>
+        <% } %> 
+        <div class="row">    
+    </div>
+<!------footer-------->
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-col-1">
+                <h3>Download our App</h3>
+                <p>download app for android phone</p>
+                <div class="app-logo">
+                    <img src="images/play1.png" alt="">
+                </div>
+            </div>
+            <div class="footer-col-2">
+                <img src="images/tairi.jpg" >
+                <p>our purpose is to satisfy our customers</p>
+            </div>
+            <div class="footer-col-3">
+                <h3>useful links</h3>
+                <ul>
+                    <li>coupons</li>
+                    <li>blog post</li>
+                    <li>Return Policy</li>
+                    <li>Join Affiliate</li>
+                </ul>
+            </div>
+            <div class="footer-col-4">
+                <h3>follow us</h3>
+                <ul>
+                    <li>Facebook</li>
+                    <li>Twitter</li>
+                    <li>Instagram</li>
+                    <li>Youtube</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // const a = document.getElementById("cart")
+    // const prodid = document.getElementById("prodid")
+    // const prodname = document.getElementById("prodname")
+    // const quantity = document.getElementById("quantity")
+    // a.addEventListener("click" , (req,res)=>{
+
+    //     const cartItem = []
+
+    //     const cartItems = localStorage.getItem('cartItems')
+
+    //     if(!cartItems){
+    //         const cartObj = {
+    //         id:parseInt(prodid.textContent),
+    //         product_name:prodname.textContent.trim(),
+    //         quantity: parseInt(quantity.value) 
+
+
+    //     }
+    //     cartItem.push(cartObj)
+    //     localStorage.setItem('cartItems' , JSON.stringify(cartItem))
+    //     return
+
+    //     }
+    //     const parsedCart = JSON.parse(cartItems)
+
+    //     const result = parsedCart.filter(cart=>cart.id == prodid.textContent)
+       
+    //     // console.log(result);
+    //     if(result.length>0){
+    //         const x = result.map(cart=>cart.quantity += +quantity.value)
+    //         // parsedCart[0].quantity += +quantity.value
+    //         return localStorage.setItem('cartItems' , JSON.stringify(parsedCart))
+    //         console.log(x);
+    //         return
+          
+    //     }
+    //     const cartObj = {
+    //         id:parseInt(prodid.textContent),
+    //         product_name:prodname.textContent.trim(),
+    //         quantity: parseInt(quantity.value) 
+    //     }
+
+    //     parsedCart.push(cartObj)
+    //     localStorage.setItem('cartItems' , JSON.stringify(parsedCart))
+
+    // })
+</script>
+</body>
+</html>

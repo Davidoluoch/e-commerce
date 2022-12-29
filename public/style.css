@@ -11,6 +11,7 @@ body{
     display: flex;
     align-items: center;
     padding: 20px;
+    position: relative;
 }
 nav{
     flex: 1;
@@ -205,13 +206,6 @@ ul{
     width: 28px;
     margin-left: 20px;
     display: none;
-
-
-
-
-
-
-
 
 }
 /*-----all products page----*/
@@ -438,5 +432,15 @@ form a{
     margin-top: 8px;
     transform: translateX(100px);
     transition: transform 1s;
+}
+.badge{
+
+    background-color: red;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    border-radius: 12px;
+    position: absolute;
+    left: 74.5rem;
 }
 
