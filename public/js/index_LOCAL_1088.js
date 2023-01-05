@@ -40,11 +40,7 @@ quantity.forEach((element) => {
 
 checkout.addEventListener('click' , async(e)=>{
     const userId = document.getElementById("userid")
-<<<<<<< HEAD
     const response = await fetch("http://localhost:3000/cart")
-=======
-    const response = await fetch("http://localhost:3000/carts")
->>>>>>> backend
     const data = await response.json()
     console.log(data);
     let orderDetails = {}
@@ -59,11 +55,7 @@ checkout.addEventListener('click' , async(e)=>{
 
     })
     const res = await fetch("http://localhost:3000/order" , {headers:{'Content-Type':'application/json'} , method:'POST' , body:JSON.stringify(orderArr)})
-<<<<<<< HEAD
     // console.log(res);
-=======
-    console.log(res);
->>>>>>> backend
     
 })
 

@@ -1,6 +1,7 @@
 const express = require("express")
 const Auth = require("../middleware/Auth")
 const Cart = require("../models/Cart")
+const Order = require("../models/Order")
 const Product = require("../models/Product")
 
 const router = express.Router()
@@ -32,6 +33,15 @@ router.post("/cart/new" , Auth, async(req,res)=>{
     
 
 })
+<<<<<<< HEAD
+=======
+router.get("/carts" , Auth , async(req,res)=>{
+    let subtotal = 0
+    const userId = req.session.user.id
+    const cartItems = await Cart.findAll({ include:[Product], where:{userId:userId}})
+    res.status(200).json(cartItems)
+})
+>>>>>>> backend
 router.post("/update" , async(req,res)=>{
     const {id , quantity} = req.body
     const result = await Cart.update({quantity} , {where:{id:+id}})
