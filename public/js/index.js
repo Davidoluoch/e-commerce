@@ -55,6 +55,7 @@ checkout.addEventListener('click' , async(e)=>{
 
     })
     const res = await fetch("http://localhost:3000/order" , {headers:{'Content-Type':'application/json'} , method:'POST' , body:JSON.stringify(orderArr)})
+    console.log(res);
     
 
 })
