@@ -9,6 +9,7 @@ const shopRoutes = require("./routes/shop")
 const User = require("./models/User")
 const Product = require("./models/Product")
 const Category = require("./models/Category")
+const Order = require("./models/Order")
 const cors = require("cors")
 const Cart = require("./models/Cart")
 const app = express()
@@ -26,6 +27,7 @@ app.use(function(req,res,next){
 
     res.locals.role = req.session.user.role
     res.locals.isAuth = req.session.isAuthenticated
+    res.locals.userId = req.session.user.id
 
     next()
 })
@@ -47,7 +49,12 @@ Product.hasMany(Cart)
 Cart.belongsTo(Product)
 User.hasMany(Cart)
 Cart.belongsTo(User)
-sequelize.sync({force:false})
+Product.hasMany(Order)
+Order.belongsTo(Product)
+User.hasMany(Order)
+Order.belongsTo(User)
+
+sequelize.sync({alter:false})
 app.listen(3000 , ()=>{
     
     console.log("Server Started at http://localhost:3000");

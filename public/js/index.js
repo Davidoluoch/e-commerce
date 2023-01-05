@@ -8,11 +8,18 @@ let tagPrice = 0;
 let subtotal = 0;
 
 quantity.forEach((element) => {
-  element.addEventListener("input", (e) => {
+  element.addEventListener("input", async(e) => {
+    const response = await fetch("http://localhost:3000/update" , {headers:{
+      'Content-Type':'application/json'
+    } , method:'POST' , body:JSON.stringify({ id:e.target.dataset.id , quantity:e.target.value})})
+    
+  
     const priceElement =
       e.target.parentElement.parentElement.querySelectorAll(".price");
     const _subtotal =
       e.target.parentElement.parentElement.querySelectorAll(".subtotal");
+    const productId = document.querySelectorAll("#prodid")
+
 
     priceElement.forEach((price) => {
       tagPrice = +price.innerText.replace("Price:Ksh", "");
@@ -31,26 +38,23 @@ quantity.forEach((element) => {
   });
 });
 
-checkout.addEventListener('click' , (e)=>{
+checkout.addEventListener('click' , async(e)=>{
+    const userId = document.getElementById("userid")
+    const response = await fetch("http://localhost:3000/carts")
+    const data = await response.json()
+    console.log(data);
+    let orderDetails = {}
+    const orderArr = []
 
-    const quantity = document.querySelectorAll('.quantity');
-    const subtotal = document.querySelectorAll(".subtotal");
-    
-    const allProducts = [] 
+    data.map((cart)=>{
+      orderDetails.productId = cart.productId,
+      orderDetails.quantity = cart.quantity,
+      orderDetails.userId = +userId.textContent
+      orderArr.push(orderDetails)
+      orderDetails = {}
 
-    for(var i = 0; i<prodname.length; i++){
-        
-      
-        allProducts.push(prodname[i].textContent)
-    }
-
-    for(var i = 0; i<subtotal.length; i++){
-        
-      
-        allProducts.push(subtotal[i].textContent)
-    }
-    console.log(allProducts);
-
+    })
+    const res = await fetch("http://localhost:3000/order" , {headers:{'Content-Type':'application/json'} , method:'POST' , body:JSON.stringify(orderArr)})
     
 
 })
