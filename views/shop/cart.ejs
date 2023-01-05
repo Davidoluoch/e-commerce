@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td><input min="1" class="quantity" type="number" value="<%= cartItem.quantity %>"></td>
+                        <td><input min="1" class="quantity" type="number" value="<%= cartItem.quantity %>"  data-id=" <%= cartItem.id %> "></td>
                         <td class="subtotal">Ksh<%= cartItem.product.price * cartItem.quantity %></td>
                     </tr>
                     <% } %> 
