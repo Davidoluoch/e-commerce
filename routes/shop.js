@@ -32,6 +32,19 @@ router.post("/cart/new" , Auth, async(req,res)=>{
     
 
 })
+router.post("/update" , async(req,res)=>{
+    const {id , quantity} = req.body
+    const result = await Cart.update({quantity} , {where:{id:+id}})
+    if(!result) return res.send(400).json("forbbiden request/operation")
+    res.json({message:"updated"})
+
+    
+})
+router.post("/order" , async(req,res)=>{
+    const result = await Order.bulkCreate(req.body)
+    if(!result) return res.status(400).json({message:"Forbidden"})
+    res.json({message:"done"})
+})
 router.get("/cart/:id/remove" , async(req,res)=>{
     const cart = await Cart.findByPk(req.params.id)
     await cart.destroy()
