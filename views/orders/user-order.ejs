@@ -1,0 +1,6 @@
+<h1>Orders</h1>
+<% for(order of orders){ %>
+    <p><%= order.product.name %> </p>
+    <i><%= order.product.price %> </i>
+    <b style="display: block;">Quantity: <%= order.quantity %> </b>
+    <% } %> 

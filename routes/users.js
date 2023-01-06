@@ -54,4 +54,12 @@ router.get("/logout" , async(req,res)=>{
     res.redirect("/")
 })
 
+
+// admin crud routes
+router.get("/users" , async(req,res)=>{})
+router.post("/users" , async(req,res)=>{})
+router.get("/users/:id" , async(req,res)=>{})
+router.get("/users/:id/edit" , async(req,res)=>{})
+router.patch("/users/:id" , async(req,res)=>{})
+router.delete("/users/:id" , async(req,res)=>{})
 module.exports = router

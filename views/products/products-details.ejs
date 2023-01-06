@@ -37,7 +37,7 @@
                         <p>Home/ <%= product.name  %> </p>
                         <h1 id="prodname"><%= product.name %> </h1>
                         <p style="display: none;" id="prodid"><%= product.id %></p>
-                        <h4>$<%= product.price %></h4>
+                        <h4>Ksh<%= product.price %></h4>
                         <select >
                             <option>select flavor</option>
                             <option>sweet red</option>
@@ -49,7 +49,6 @@
                         <input type="text" name="productId" value="<%= product.id %>" hidden >
                         <button class="btn" style="width: 15rem;" type="submit">Add to Cart</button>
                         </form>
-                        
                         <p style="margin-bottom: 5px;">Category: <%= product.category.name %></p>
                         <h3>Product Details <i class="fa fa-indent"></i></h3>
                         <br>

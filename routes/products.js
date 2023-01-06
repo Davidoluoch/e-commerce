@@ -2,8 +2,10 @@ const express = require("express");
 const Joi = require("joi");
 const multer = require("multer");
 const Product = require("../models/Product");
-const Auth = require("../middleware/Auth")
-const Category = require("../models/Category")
+const Auth = require("../middleware/Auth");
+const isInt = require("../utils/isInt");
+const Category = require("../models/Category");
+const Admin = require("../middleware/Admin");
 
 const storageConfig = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -21,11 +23,11 @@ router.get("/products", async (req, res) => {
   const products = await Product.findAll({});
   res.render("products/products", { products });
 });
-router.get("/products/new", Auth , async (req, res) => {
+router.get("/products/new", Auth , Admin, async (req, res) => {
   const categories = await Category.findAll({})  
   res.render("products/new" , {categories});
 });
-router.post("/products", upload.single("image"), async (req, res) => {
+router.post("/products", Auth, Admin, upload.single("image"), async (req, res) => {
   const schema = Joi.object({
     name: Joi.string().required(),
     price: Joi.number().required().positive(),
@@ -55,21 +57,23 @@ router.post("/products", upload.single("image"), async (req, res) => {
 
   res.redirect("/products/new");
 });
-router.get("/products/ms" , async(req,res)=>{
+router.get("/products/ms" , Auth, Admin, async(req,res)=>{
   const products = await Product.findAll({include:[Category]});
   res.render("products/manage-product" , {products})
 })
 router.get("/products/:id", async (req, res) => {
+    const result = isInt(req.params.id)
+    if(!result) return res.render("404")
     const product = await Product.findByPk(req.params.id , {include:Category})
     const relatedProducts = await Product.findAll({where:{categoryId:product.categoryId}})
     res.render("products/products-details" , {product , relatedProducts})
 });
-router.get("/products/:id/edit" , async (req, res) => {
+router.get("/products/:id/edit" , Auth , Admin, async (req, res) => {
   const categories = await Category.findAll({})
   const product = await Product.findByPk(req.params.id);
   res.render("products/edit", { product , categories });
 });
-router.patch("/products/:id" ,upload.single('image') , async(req,res)=>{
+router.patch("/products/:id" , Auth, Admin ,upload.single('image') , async(req,res)=>{
     let newImage;
     if(req.file){
       newImage = req.file.path

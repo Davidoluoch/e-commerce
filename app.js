@@ -12,6 +12,7 @@ const Category = require("./models/Category")
 const Order = require("./models/Order")
 const cors = require("cors")
 const Cart = require("./models/Cart")
+const checkNull = require("./middleware/checkNull")
 const app = express()
 app.use(express.urlencoded({extended:true}))
 app.use(session({
@@ -34,6 +35,7 @@ app.use(function(req,res,next){
 app.set('view engine' , 'ejs')
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
+app.use(checkNull)
 app.use(productsRoutes)
 app.use(usersRoutes)
 app.use(shopRoutes)
@@ -42,6 +44,9 @@ app.get("/" , async(req,res)=>{
     res.render("index")
 })
 
+app.get("*" , (req,res,error)=>{
+    res.render("404")
+})
 
 Category.hasMany(Product)
 Product.belongsTo(Category)
@@ -54,8 +59,7 @@ Order.belongsTo(Product)
 User.hasMany(Order)
 Order.belongsTo(User)
 
-sequelize.sync({alter:false})
+sequelize.sync({force:false})
 app.listen(3000 , ()=>{
-    
     console.log("Server Started at http://localhost:3000");
 })

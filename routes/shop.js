@@ -19,7 +19,7 @@ router.post("/cart/new" , Auth, async(req,res)=>{
 
     const {quantity , productId} = req.body
     const userId = req.session.user.id
-    const existingProduct = await Cart.findOne({where:{productId:productId}})
+    const existingProduct = await Cart.findOne({where:{productId:productId , userId:userId}})
 
     if(existingProduct){
         existingProduct.quantity += +quantity 
@@ -33,15 +33,12 @@ router.post("/cart/new" , Auth, async(req,res)=>{
     
 
 })
-<<<<<<< HEAD
-=======
 router.get("/carts" , Auth , async(req,res)=>{
     let subtotal = 0
     const userId = req.session.user.id
     const cartItems = await Cart.findAll({ include:[Product], where:{userId:userId}})
     res.status(200).json(cartItems)
 })
->>>>>>> backend
 router.post("/update" , async(req,res)=>{
     const {id , quantity} = req.body
     const result = await Cart.update({quantity} , {where:{id:+id}})
@@ -51,9 +48,24 @@ router.post("/update" , async(req,res)=>{
     
 })
 router.post("/order" , async(req,res)=>{
-    const result = await Order.bulkCreate(req.body)
-    if(!result) return res.status(400).json({message:"Forbidden"})
-    res.json({message:"done"})
+        // Promise.all(req.body.map(async(item)=>{
+        //     const order = await Order.findAll({where:{productId:item.productId , userId:item.userId}})
+        //     console.log(order);
+        //     if(order.length>0) {
+        //         return console.log("order exists");
+        //     }   
+        // }))
+
+        const result = await Order.bulkCreate(req.body)
+        if(!result) return res.status(400).json({message:"Forbidden"})
+        const carts = await Cart.findAll({where:{userId:req.body.userId}})
+        res.json({message:"done"})
+    
+})
+
+router.get("/orders/:id/user" , async(req,res)=>{
+    const orders = await Order.findAll({ include:[Product], where:{userId:req.params.id}})
+    res.render("orders/user-order" , {orders})
 })
 router.get("/cart/:id/remove" , async(req,res)=>{
     const cart = await Cart.findByPk(req.params.id)

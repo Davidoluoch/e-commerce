@@ -8,15 +8,16 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/products">Products</a></li>
                 <% if(locals.role === 'Admin' && locals.isAuth){ %> 
-                <li><a href="/products/new">Add Products</a></li>
                 <li><a href="/products/ms">Manage Products</a></li>
                 <% } %> 
                 <li><a href="">About</a></li>
                 <li><a href="">Contact</a></li>
                 <% if(locals.isAuth){ %> 
                 <li><a href="/logout">Logout</a></li>
-                <% } %> 
+                <li><a href="/orders/<%= locals.userId %>/user">My Orders</a></li>
+                <% }else if(!locals.isAuth){ %> 
                 <li><a href="/login">Account</a></li>
+                <% } %> 
             </ul>
         </nav>
     

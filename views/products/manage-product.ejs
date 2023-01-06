@@ -10,7 +10,8 @@
 <body>
     
     <div class="container col-md-6">
-        <h3>Products DashBoard</h3>
+        <!-- <h3>Products DashBoard</h3> -->
+        
     <table class="table" style="margin-top: 10%;">
         <thead class="bg-dark text-white">
           <tr>
@@ -23,6 +24,7 @@
           </tr>
         </thead>
         <tbody>
+         
             <% for(product of products){ %> 
           <tr>
             <th scope="row"><%= product.id %> </th>
@@ -38,6 +40,7 @@
           <% } %> 
         </tbody>
       </table>
+      <a href="/products/new" style="text-decoration: none; border: none; background-color: rgb(8, 158, 8); padding: 10px; color: white; font-weight: 600; border-radius: 5px;">Add Products</a>
     </div>
 </body>
 </html>
