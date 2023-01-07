@@ -58,13 +58,22 @@ router.post("/order" , async(req,res)=>{
 
         const result = await Order.bulkCreate(req.body)
         if(!result) return res.status(400).json({message:"Forbidden"})
-        const carts = await Cart.findAll({where:{userId:req.body.userId}})
+        Promise.all(result.map(async(order)=>{
+            const product = await Product.findByPk(order.productId)
+            product.quantity = product.quantity - +order.quantity;
+            await product.save();
+        }))
+        const carts = await Cart.findAll({where:{userId:res.locals.userId}})
+        Promise.all(carts.map(async(cart)=>{
+            await cart.destroy()
+        }))
         res.json({message:"done"})
     
 })
 
 router.get("/orders/:id/user" , async(req,res)=>{
     const orders = await Order.findAll({ include:[Product], where:{userId:req.params.id}})
+    // console.log(orders);
     res.render("orders/user-order" , {orders})
 })
 router.get("/cart/:id/remove" , async(req,res)=>{

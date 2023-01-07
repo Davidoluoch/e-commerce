@@ -2,10 +2,13 @@ const express = require("express")
 const Joi = require("joi")
 const bcrypt = require("bcryptjs")
 const User = require("../models/User")
+const Product = require("../models/Product")
 
 const router = express.Router()
 
 router.get("/login" , async(req,res)=>{
+    const products = await Product.count()
+    console.log(products);
     res.render("account")
 })
 router.post("/signup" , async(req,res)=>{

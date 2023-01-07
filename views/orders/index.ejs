@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Order Management</title>
+</head>
+<body>
+    
+    
+    <div class="container col-md-6">
+        <!-- <h3>Products DashBoard</h3> -->
+        
+    <table class="table" style="margin-top: 10%;">  
+        <thead class="bg-dark text-white">
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Customer Username</th>
+            <th scope="col">Product</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">OrderDate</th>
+
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+         
+            <% for(order of orders){ %> 
+          <tr>
+            <th scope="row"><%= order.id %> </th>
+            <td><%= order.user.username %> </td>
+            <td><%= order.product.name %> </td>
+            <td><%= order.quantity %> </td>
+            <td><%= new Intl.DateTimeFormat("en-us",{dateStyle:"full"}).format(order.createdAt)  %> </td>
+            <td class="ml-4"><div class="btn-group">
+                <a href="orders/<%= order.id %>/edit" class="btn btn-outline-primary btn-sm">Edit</a> <form action="/orders/<%= order.id %>?_method=DELETE" method="post"> <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button></form> 
+            </div>
+        </td>
+          </tr>
+          <% } %> 
+        </tbody>
+      </table>
+      <a href="/orders/new" style="text-decoration: none; border: none; background-color: rgb(8, 158, 8); padding: 10px; color: white; font-weight: 600; border-radius: 5px;">Add Order</a>
+      <% if(orders.length<=0){ %> 
+        <div class="mt-4">
+        <p>No Orders Made Yet</p>
+    </div>
+        <% } %>
+    </div>
+
+    <style>
+        body{
+            background-color: rgb(146, 247, 213);
+        }
+    </style>
+</body>
+</html>

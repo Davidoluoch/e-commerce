@@ -6,6 +6,7 @@ const sequelize = require("./database/conn")
 const productsRoutes = require("./routes/products")
 const usersRoutes = require("./routes/users")
 const shopRoutes = require("./routes/shop")
+const orderRoutes = require("./routes/orders")
 const User = require("./models/User")
 const Product = require("./models/Product")
 const Category = require("./models/Category")
@@ -39,9 +40,12 @@ app.use(checkNull)
 app.use(productsRoutes)
 app.use(usersRoutes)
 app.use(shopRoutes)
+app.use(orderRoutes)
+
 
 app.get("/" , async(req,res)=>{
-    res.render("index")
+    const products = await Product.findAll({limit:3});
+    res.render("index" , {products})
 })
 
 app.get("*" , (req,res,error)=>{

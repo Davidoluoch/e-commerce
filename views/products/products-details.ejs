@@ -46,9 +46,14 @@
                         </select>
                         <form action="/cart/new" method="post">
                         <input type="number" name="quantity" value="1" id="quantity">
-                        <input type="text" name="productId" value="<%= product.id %>" hidden >
-                        <button class="btn" style="width: 15rem;" type="submit">Add to Cart</button>
-                        </form>
+                        <input type="text" name="productId" value="<%= product.id %>" hidden >  
+                        <button></button>
+                        <button class="btn" style="width: 15rem;" type="submit" <%= product.quantity == 0 ? 'disabled' : '' %>>Add to Cart</button>
+
+                        </form>  
+                        <%if(product.quantity<=0){ %> 
+                            <p style="color: red; font-weight: 600;">Out of Stock!!!</p>
+                            <% } %> 
                         <p style="margin-bottom: 5px;">Category: <%= product.category.name %></p>
                         <h3>Product Details <i class="fa fa-indent"></i></h3>
                         <br>
@@ -175,5 +180,10 @@
 
     // })
 </script>
+<style>
+    .disabled{
+
+    }
+</style>
 </body>
 </html>

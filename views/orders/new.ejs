@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="/style.css"> -->
+    <title>Add Order</title>
+</head>
+<body>
+    <%- include("../partials/navbar") %>   
+    <div class="container mt-5">
+        <div class="row">
+            <div class=" center col-md-6 col-sm-12">
+            <form action="" method="post">
+                <h2>Add Order</h2>
+                <div class="form-group">
+                    <label for="name">Customer</label>
+                   <select name="userId" id="" class="form-select">
+                    <% for(user of users){ %> 
+                        <option value="<%= user.id %>"><%= user.username %></option>
+
+                        <% } %> 
+                   </select>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="text" name="quantity" value="" class="form-control">
+                </div>  
+                <div class="form-group">
+                    <label for="category">Products</label>
+                    <select name="productId" id="category" class="form-select">
+                        <% for( product of products){%> 
+                        <option   value="<%= product.id  %> "><%= product.name %> </option>
+                        <% } %> 
+                    </select>
+                </div>
+                <div class="mt-2 p-2">
+                    <button type="submit" class="btn btn-outline-success">Place Order</button>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+    <style>
+        .center{
+
+            margin: auto;
+        }
+        .navbar{
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+}
+nav{
+    flex: 1;
+    text-align: right;
+}
+nav ul{
+    display: inline-block;
+    list-style-type: none;
+
+}
+nav ul li{
+    display: inline-block;
+    margin-right: 20px;
+}
+a{
+    text-decoration: none;
+    color: #555;
+
+}
+p{
+    color: #555;
+}
+@media only screen and (max-width:800px){
+    nav ul{
+        position: absolute;
+        top: 70px;
+        left: 0;
+        background: #333;
+        width: 100%;
+    
+    }
+    nav ul li{
+        display: block;
+        margin-right: 50px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    nav ul li a{
+        color: #fff;
+    }
+    .menu-icon{
+        display: block;
+        cursor: pointer;
+    }
+    .menu-icon{
+    width: 28px;
+    margin-left: 20px;
+    display: none;
+
+}
+.app-logo{
+    margin-top: 20px;
+}
+.app-logo img{
+    width: 140px;
+}
+
+}
+.logo{
+
+    height: 8rem;
+}
+    </style>
+</body>
+</html>
