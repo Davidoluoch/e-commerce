@@ -13,4 +13,4 @@ module.exports = sequelize.define('order' , {
         type:DataTypes.INTEGER,
         allowNull:false
     }
-})
+} , {paranoid:true})

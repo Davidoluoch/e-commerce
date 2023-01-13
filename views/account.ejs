@@ -31,7 +31,7 @@
                             <input type="email" placeholder="email" name="email">
                             <input type="password" placeholder="Password" name="password">
                             <button type="submit" class="btn">Login</button>
-                            <a href="">forgot password</a>
+                           
                         </form>
                         <form action="/signup" method="post" id="RegForm">
                             <input type="text" placeholder="Username" name="username">
@@ -48,41 +48,7 @@
      </div>
             
 <!------footer-------->
-<div class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="footer-col-1">
-                <h3>Download our App</h3>
-                <p>download app for android phone</p>
-                <div class="app-logo">
-                    <img src="images/play1.png" alt="">
-                </div>
-            </div>
-            <div class="footer-col-2">
-                <img src="images/tairi.jpg" >
-                <p>our purpose is to satisfy our customers</p>
-            </div>
-            <div class="footer-col-3">
-                <h3>useful links</h3>
-                <ul>
-                    <li>coupons</li>
-                    <li>blog post</li>
-                    <li>Return Policy</li>
-                    <li>Join Affiliate</li>
-                </ul>
-            </div>
-            <div class="footer-col-4">
-                <h3>follow us</h3>
-                <ul>
-                    <li>Facebook</li>
-                    <li>Twitter</li>
-                    <li>Instagram</li>
-                    <li>Youtube</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+<%- include("partials/footer") %> 
 <!------js for toggle form-------->
 <script>
     var LoginForm=document.getElementById("LoginForm");

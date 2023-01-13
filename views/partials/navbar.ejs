@@ -10,18 +10,16 @@
                 <% if(locals.role === 'Admin' && locals.isAuth){ %> 
                 <li><a href="/products/ms">Manage Products</a></li>
                 <% } %> 
-                <li><a href="">About</a></li>
-                <li><a href="">Contact</a></li>
+                <li><a href="/contact">Contact</a></li>
                 <% if(locals.isAuth){ %> 
                 <li><a href="/logout">Logout</a></li>
-                <li><a href="/orders/<%= locals.userId %>/user">My Orders</a></li>
                 <% }else if(!locals.isAuth){ %> 
                 <li><a href="/login">Account</a></li>
                 <% } %> 
             </ul>
         </nav>
     
-          <a href="/cart"> <img src="/images/cat4.png" width="50px" height="50px"></a>
+          <!-- <a href="/cart"> <img src="/images/cat4.png" width="50px" height="50px"></a> -->
            <!-- <img src="/images/menu1.png" class="menu-icon" onclick="menutoggle()">     -->
             </div>
             

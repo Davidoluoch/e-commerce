@@ -5,6 +5,7 @@ const Product = require("../models/Product")
 const router = express.Router()
 
 router.get("/orders" , async(req,res)=>{
+    
     const orders = await Order.findAll({include:[Product , User]})
     res.render("orders/index" , {orders})
 })
