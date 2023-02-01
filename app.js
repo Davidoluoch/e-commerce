@@ -71,7 +71,7 @@ Product.belongsTo(Category)
 // Order.belongsTo(User)
 
 sequelize.sync()
-app.listen(3000 || process.env.PORT, ()=>{
+app.listen(process.env.PORT, ()=>{
     console.log("Server Started at http://localhost:3000");
 })
  
