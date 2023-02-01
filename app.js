@@ -17,7 +17,7 @@ const checkNull = require("./middleware/checkNull")
 const app = express()
 app.use(express.urlencoded({extended:true}))
 app.use(session({
-    secret:process.env.SESSION_SECRET,
+    secret:"edward",
     resave:false,
     saveUninitialized:false
 }))
@@ -74,3 +74,11 @@ sequelize.sync({force:false})
 app.listen(3000 , ()=>{
     console.log("Server Started at http://localhost:3000");
 })
+ 
+ 
+
+
+ 
+  
+
+
