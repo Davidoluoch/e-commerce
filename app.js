@@ -70,7 +70,7 @@ Product.belongsTo(Category)
 // User.hasMany(Order)
 // Order.belongsTo(User)
 
-sequelize.sync({force:false})
+sequelize.sync()
 app.listen(3000 || process.env.PORT, ()=>{
     console.log("Server Started at http://localhost:3000");
 })
