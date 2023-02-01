@@ -109,6 +109,12 @@ router.patch("/products/:id" , Auth, Admin ,upload.single('image') , async(req,r
     }
 
 })
+router.delete("/products/:id",async(req,res)=>{
+ const product=await Product.findByPk (req.params.id)
+ await product.destroy()
+ res.redirect("/products/ms")
+
+})
 
 
 
