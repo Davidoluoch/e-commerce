@@ -17,7 +17,7 @@ const checkNull = require("./middleware/checkNull")
 const app = express()
 app.use(express.urlencoded({extended:true}))
 app.use(session({
-    secret:"edward",
+    secret:process.env.SESSION_SECRET,
     resave:false,
     saveUninitialized:false
 }))
@@ -71,7 +71,7 @@ Product.belongsTo(Category)
 // Order.belongsTo(User)
 
 sequelize.sync({force:false})
-app.listen(3000 , ()=>{
+app.listen(3000 || process.env.PORT, ()=>{
     console.log("Server Started at http://localhost:3000");
 })
  
